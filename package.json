@@ -1,0 +1,17 @@
+{
+  "name": "cookbook",
+  "version": "1.0.0",
+  "description": "Cookbook for PixpipeJS in a form of a GitBook",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "gitbook build book docs",
+    "dev": "gitbook serve book docs"
+  },
+  "author": "Jonathan Lurie",
+  "license": "MIT",
+  "devDependencies": {
+    "gitbook-cli": "^2.3.2"
+  },
+  "dependencies": {}
+}

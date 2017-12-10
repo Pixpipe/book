@@ -1,0 +1,27 @@
+{
+  "root": ".",
+  "title": "My Book",
+  "plugins": ["insert-logo", "favicon", "analytics", "expandable-chapters", "summary", "hide-published-with"],
+
+  "pluginsConfig": {
+
+    "insert-logo": {
+      "url": "/images/logo.png"
+    },
+
+    "favicon":{
+      "shortcut": "/images/favicon.png",
+      "bookmark": "/images/favicon.png",
+      "appleTouch": "/images/favicon.png",
+      "appleTouchMore": {
+        "120x120": "/images/favicon.png",
+        "180x180": "/images/favicon.png"
+      }
+    },
+
+    "analytics": {
+      "google": "UA-XXXXXXXXX-X"
+    }
+
+  }
+}
