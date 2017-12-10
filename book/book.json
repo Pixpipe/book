@@ -6,7 +6,7 @@
   "pluginsConfig": {
 
     "insert-logo": {
-      "url": "/images/logo.png"
+      "url": "http://me.jonathanlurie.fr/book/images/logo.png"
     },
 
     "favicon":{
