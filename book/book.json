@@ -1,12 +1,12 @@
 {
   "root": ".",
   "title": "My Book",
-  "plugins": ["insert-logo", "favicon", "analytics", "expandable-chapters", "summary", "hide-published-with"],
+  "plugins": ["insert-logo", "favicon", "analytics", "expandable-chapters", "hide-published-with"],
 
   "pluginsConfig": {
 
     "insert-logo": {
-      "url": "http://me.jonathanlurie.fr/book/images/logo.png"
+      "url": "https://github.com/Pixpipe/cookbook/blob/master/docs/images/logo.png?raw=true"
     },
 
     "favicon":{
@@ -20,7 +20,7 @@
     },
 
     "analytics": {
-      "google": "UA-XXXXXXXXX-X"
+      "google": "UA-110948661-1"
     }
 
   }
