@@ -33,7 +33,7 @@ In order to make Pixpipejs the way it is, we have developped a few modules that 
 - [codecutils](https://github.com/Pixpipe/codecutils) provides some static functions to encode or decode data, especially extract numerical array from `ArrayBuffer` without constraint, convert to unicode strings, etc.
 - [pixbincodec](https://github.com/Pixpipe/pixbincodec) to read and write into the native Pixpipe format: PixBin files. Although this lib create or reads from `ArrayBuffer`, the exampled provided show how to read from or write to disk depending if you are using JS in a browser of in Node.
 - [mniobjparser](https://github.com/Pixpipe/mniobjparser) to parse the 3D mesh/surface files output of CIVET, called MNI OBJ
-- [qeegmodfile](https://github.com/Pixpipe/qeegmodfile) a EEG file parser for the MOD format used in the Canada-China-Cuba consortium
+- [qeegmodfile](https://github.com/jonathanlurie/qeegmodfile) a EEG file parser for the MOD format used in the Canada-China-Cuba consortium
 - [edfdecoder](https://github.com/Pixpipe/edfdecoder) a EDF (European Data Format) file parser, especially used in EEG
 
 

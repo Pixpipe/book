@@ -34,6 +34,8 @@
   * [Practical example](5-make-your-own-filter/2-practical-example.md)
   * [Going Further](5-make-your-own-filter/3-going-further.md)
 
+* Browse Filters (TODO)
+* PixBin File Format (TODO)
 * Contribution Guide (TODO)
 
 
