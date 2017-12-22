@@ -45,3 +45,6 @@ Metadata are usually considered *public* because they can be accessed from the o
 
 ## Serialization
 The serialization is the process to turn a data container (PixpipeContainer) into a file. This file can then be read by Pixpipe to be "de-serialized" and produce a PixpipeContainer similar to the original. The serialization handles only the attributes `_data` and `_metadata`, for this reason it is unsafe to store information in other attributes. They would be lost in the serialization process.
+
+## BVH
+Bounding Volume Hierarchy. Commonly used in video games to perform hit tests in real time between triangles and rays, a BVH is a way to arrange the triangles as a binary tree to perform fast lookups. As a comparison, octrees are usually used for sigle points spatial lookup while BVH is for shapes (triangles or more complex)
