@@ -17,6 +17,7 @@
     * [Signal1D](2-core-description/0-README.md#signal1d)
     * [LineString](2-core-description/0-README.md#linestring)
     * [Mesh3D](2-core-description/0-README.md#mesh3d)
+  * [Decoders](2-core-description/0-README.md#decoders)
 
 * [Building Pixpipe](3-build-pixpipe/0-README.md)
 
@@ -33,10 +34,11 @@
   * [Let's Start](5-make-your-own-filter/1-lets-start.md)
   * [Practical example](5-make-your-own-filter/2-practical-example.md)
   * [Going Further](5-make-your-own-filter/3-going-further.md)
+  <!-- * [Custom Decoders](5-make-your-own-filter/4-custom-decoders.md) -->
 
-* Browse Filters (TODO)
-* PixBin File Format (TODO)
-* Contribution Guide (TODO)
+<!-- * Browse Filters (TODO) -->
+<!-- * PixBin File Format (TODO) -->
+<!-- * Contribution Guide (TODO) -->
 
 
 

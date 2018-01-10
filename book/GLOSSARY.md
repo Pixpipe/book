@@ -48,3 +48,6 @@ The serialization is the process to turn a data container (PixpipeContainer) int
 
 ## BVH
 Bounding Volume Hierarchy. Commonly used in video games to perform hit tests in real time between triangles and rays, a BVH is a way to arrange the triangles as a binary tree to perform fast lookups. As a comparison, octrees are usually used for sigle points spatial lookup while BVH is for shapes (triangles or more complex)
+
+## Decoder
+A decoder is a piece of code that is able to parse a file and extract some data, such as an `Image2D` or any other container. Pixpipe decoders lay in the the folder `src/decoders/`

@@ -349,6 +349,19 @@
             
         </li>
     
+        <li class="chapter " data-level="1.3.3" data-path="0-README.html">
+            
+                <a href="0-README.html#decoders">
+            
+                    
+                    Decoders
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -535,45 +548,6 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7" >
-            
-                <span>
-            
-                    
-                    Browse Filters (TODO)
-            
-                </span>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8" >
-            
-                <span>
-            
-                    
-                    PixBin File Format (TODO)
-            
-                </span>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9" >
-            
-                <span>
-            
-                    
-                    Contribution Guide (TODO)
-            
-                </span>
-            
-
-            
-        </li>
-    
 
     
         
@@ -704,6 +678,13 @@ This is still an <code>interface</code> and even though you could probably use i
 <li>the vertex colors as a list of RGBa such as <code>[V0R, V0G, V0G, V0a, V1R, V1G, V1B, V1a, ...]</code> (<code>Uint8Array</code>)
 Each of these structure can be set from dedicated methods and you should not have to deal with low level private arrays.<br><a href="http://www.pixpipe.io/pixpipejs/doc/#Mesh3D" target="_blank">Read more</a>.</li>
 </ul>
+<h1 id="decoders">Decoders</h1>
+<p>As we have seen earlier, <code>Filter</code> take inputs, perform a task and give outputs. Most of the time, processing data means there is a preliminary step of getting these data from existing files. Reading a file, <em>decoding</em>, is a task that can be performed in Pixpipe, directly in the browser with Javascript. Before going further on how to access a file buffer and how to create a <code>Image2D</code> out of a Jpeg file, we need to be clear on the existing pieces to use to do it, so that we don&apos;t reinvent the wheel.  </p>
+<p>Notice: What we call <em>Data <a href="../GLOSSARY.html#decoder" class="glossary-term" title="A decoder is a piece of code that is able to parse a file and extract some data, such as an Image2D or any other container. Pixpipe decoders lay in the the folder src/decoders/">Decoder</a></em> does not match to any class name in Pixpipe, it is just a general term used for the sake of this explanation and the same goes for <em>Generic Decoders</em>.</p>
+<p>Here, we are taking the example of <code>TiffDecoder</code>. As its name implies, it takes the <code>ArrayBuffer</code> of a Tiff file in input and outputs an <code>Image2D</code>.<br>The class <code>TiffDecoder</code> is a special kind of <code>Filter</code> because it inherits from the interface <code>Decoder</code> (and <code>Decoder</code> inherit from <code>Filter</code>). This interface adds the logic responsible for dealing with inputs of different kinds; by default of a binary format, but some files are text-based. Other than that, a <code>Decoder</code> is just like a <code>Filter</code>.<br>Since we don&apos;t want to reinvent the wheel, we don&apos;t want to reimplement a Tiff parser if a good one is already out there, this is why the last link of the chain, <code>TiffDecoder</code>, has a dependency to the <a href="https://github.com/constantinius/geotiff.js" target="_blank">Geotiff</a> library.</p>
+<p>As a separate matter and in order to simplify the usage of Pixpipe to other developers, we decided it would be nice to have a <a href="../GLOSSARY.html#decoder" class="glossary-term" title="A decoder is a piece of code that is able to parse a file and extract some data, such as an Image2D or any other container. Pixpipe decoders lay in the the folder src/decoders/">decoder</a> that handles different kinds of files without having to specify if it&apos;s a PNG, a Jpeg or a Tiff. In the end, this <a href="../GLOSSARY.html#decoder" class="glossary-term" title="A decoder is a piece of code that is able to parse a file and extract some data, such as an Image2D or any other container. Pixpipe decoders lay in the the folder src/decoders/">decoder</a> would just output an <code>Image2D</code>. This it what we call <em>Generic Decoders</em>.<br>Those ones work a bit like regular <a href="../GLOSSARY.html#decoder" class="glossary-term" title="A decoder is a piece of code that is able to parse a file and extract some data, such as an Image2D or any other container. Pixpipe decoders lay in the the folder src/decoders/">decoder</a> but instead of relying on external libraries to do the job, they rely on decoders that already exist in Pixpipe. When the <code>update()</code> method is called, these generic decoders will successively attempt to decode the buffer with each decoders specified in the list (<code>this._decoders</code>) until it succeed.</p>
+<p><a href="images/decoders.png"><img src="images/decoders.png" alt="Pixpipe core"></a></p>
+<!-- Enough with the theory, learn more about how to properly make your own file decoder in Pixpipe [here](/5-make-your-own-filter/4-custom-decoders.md) -->
 <script>
 if ('UA-110948661-1') {
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -758,7 +739,7 @@ if ('UA-110948661-1') {
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Core Description","level":"1.3","depth":1,"next":{"title":"Generic Interfaces","level":"1.3.1","depth":2,"anchor":"#generic-interfaces","path":"2-core-description/0-README.md","ref":"2-core-description/0-README.md#generic-interfaces","articles":[{"title":"PixpipeObject","level":"1.3.1.1","depth":3,"anchor":"#pixpipeobject","path":"2-core-description/0-README.md","ref":"2-core-description/0-README.md#pixpipeobject","articles":[]},{"title":"PixpipeContainer","level":"1.3.1.2","depth":3,"anchor":"#pixpipecontainer","path":"2-core-description/0-README.md","ref":"2-core-description/0-README.md#pixpipecontainer","articles":[]},{"title":"PixpipeContainerMultiData","level":"1.3.1.3","depth":3,"anchor":"#pixpipecontainermultidata","path":"2-core-description/0-README.md","ref":"2-core-description/0-README.md#pixpipecontainermultidata","articles":[]},{"title":"Filter","level":"1.3.1.4","depth":3,"anchor":"#filter","path":"2-core-description/0-README.md","ref":"2-core-description/0-README.md#filter","articles":[]},{"title":"ImageToImageFilter","level":"1.3.1.5","depth":3,"anchor":"#imagetoimagefilter","path":"2-core-description/0-README.md","ref":"2-core-description/0-README.md#imagetoimagefilter","articles":[]}]},"previous":{"title":"Pixpipe Overview","level":"1.2","depth":1,"path":"1-overview/0-README.md","ref":"1-overview/0-README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["insert-logo","favicon","analytics","expandable-chapters","hide-published-with","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"analytics":{"google":"UA-110948661-1"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":{"shortcut":"/images/favicon.png","bookmark":"/images/favicon.png","appleTouch":"/images/favicon.png","appleTouchMore":{"120x120":"/images/favicon.png","180x180":"/images/favicon.png"}},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://github.com/Pixpipe/cookbook/blob/master/docs/images/logo.png?raw=true"},"expandable-chapters":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"My Book","gitbook":"*"},"file":{"path":"2-core-description/0-README.md","mtime":"2017-12-11T21:05:41.231Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-12-22T16:38:41.132Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Core Description","level":"1.3","depth":1,"next":{"title":"Generic Interfaces","level":"1.3.1","depth":2,"anchor":"#generic-interfaces","path":"2-core-description/0-README.md","ref":"2-core-description/0-README.md#generic-interfaces","articles":[{"title":"PixpipeObject","level":"1.3.1.1","depth":3,"anchor":"#pixpipeobject","path":"2-core-description/0-README.md","ref":"2-core-description/0-README.md#pixpipeobject","articles":[]},{"title":"PixpipeContainer","level":"1.3.1.2","depth":3,"anchor":"#pixpipecontainer","path":"2-core-description/0-README.md","ref":"2-core-description/0-README.md#pixpipecontainer","articles":[]},{"title":"PixpipeContainerMultiData","level":"1.3.1.3","depth":3,"anchor":"#pixpipecontainermultidata","path":"2-core-description/0-README.md","ref":"2-core-description/0-README.md#pixpipecontainermultidata","articles":[]},{"title":"Filter","level":"1.3.1.4","depth":3,"anchor":"#filter","path":"2-core-description/0-README.md","ref":"2-core-description/0-README.md#filter","articles":[]},{"title":"ImageToImageFilter","level":"1.3.1.5","depth":3,"anchor":"#imagetoimagefilter","path":"2-core-description/0-README.md","ref":"2-core-description/0-README.md#imagetoimagefilter","articles":[]}]},"previous":{"title":"Pixpipe Overview","level":"1.2","depth":1,"path":"1-overview/0-README.md","ref":"1-overview/0-README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["insert-logo","favicon","analytics","expandable-chapters","hide-published-with"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"analytics":{"google":"UA-110948661-1"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":{"shortcut":"/images/favicon.png","bookmark":"/images/favicon.png","appleTouch":"/images/favicon.png","appleTouchMore":{"120x120":"/images/favicon.png","180x180":"/images/favicon.png"}},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://github.com/Pixpipe/cookbook/blob/master/docs/images/logo.png?raw=true"},"expandable-chapters":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"My Book","gitbook":"*"},"file":{"path":"2-core-description/0-README.md","mtime":"2018-01-10T18:01:06.591Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-01-10T19:50:03.624Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
@@ -777,10 +758,6 @@ if ('UA-110948661-1') {
     
         
         <script src="../gitbook/gitbook-plugin-hide-published-with/plugin.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
         
     
         

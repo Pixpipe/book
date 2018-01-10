@@ -102,3 +102,19 @@ The `Mesh3D` class is a good example of usage of `PixpipeContainerMultiData`. An
 - the vertex colors as a list of RGBa such as `[V0R, V0G, V0G, V0a, V1R, V1G, V1B, V1a, ...]` (`Uint8Array`)
 Each of these structure can be set from dedicated methods and you should not have to deal with low level private arrays.  
 [Read more](http://www.pixpipe.io/pixpipejs/doc/#Mesh3D).
+
+# Decoders
+As we have seen earlier, `Filter` take inputs, perform a task and give outputs. Most of the time, processing data means there is a preliminary step of getting these data from existing files. Reading a file, *decoding*, is a task that can be performed in Pixpipe, directly in the browser with Javascript. Before going further on how to access a file buffer and how to create a `Image2D` out of a Jpeg file, we need to be clear on the existing pieces to use to do it, so that we don't reinvent the wheel.  
+
+Notice: What we call *Data Decoder* does not match to any class name in Pixpipe, it is just a general term used for the sake of this explanation and the same goes for *Generic Decoders*.
+
+Here, we are taking the example of `TiffDecoder`. As its name implies, it takes the `ArrayBuffer` of a Tiff file in input and outputs an `Image2D`.  
+The class `TiffDecoder` is a special kind of `Filter` because it inherits from the interface `Decoder` (and `Decoder` inherit from `Filter`). This interface adds the logic responsible for dealing with inputs of different kinds; by default of a binary format, but some files are text-based. Other than that, a `Decoder` is just like a `Filter`.  
+Since we don't want to reinvent the wheel, we don't want to reimplement a Tiff parser if a good one is already out there, this is why the last link of the chain, `TiffDecoder`, has a dependency to the [Geotiff](https://github.com/constantinius/geotiff.js) library.
+
+As a separate matter and in order to simplify the usage of Pixpipe to other developers, we decided it would be nice to have a decoder that handles different kinds of files without having to specify if it's a PNG, a Jpeg or a Tiff. In the end, this decoder would just output an `Image2D`. This it what we call *Generic Decoders*.  
+Those ones work a bit like regular decoder but instead of relying on external libraries to do the job, they rely on decoders that already exist in Pixpipe. When the `update()` method is called, these generic decoders will successively attempt to decode the buffer with each decoders specified in the list (`this._decoders`) until it succeed.
+
+[![Pixpipe core](images/decoders.png)](images/decoders.png)
+
+<!-- Enough with the theory, learn more about how to properly make your own file decoder in Pixpipe [here](/5-make-your-own-filter/4-custom-decoders.md) -->
