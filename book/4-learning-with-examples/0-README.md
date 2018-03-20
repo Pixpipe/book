@@ -1,11 +1,13 @@
 # Learning with examples
-The following examples are a nice and easy way to progressively go through using Pixpipe, from the basics to advanced. It is important to understand how to use Pixpipe before trying to develop your own filters in order to respect the coherence that makes it easy to use on the long shot.  
+The following examples are a nice and easy way to progressively go through using Pixpipe, from the basics to advanced. It is important to understand how to use Pixpipe before trying to develop your own filters in order to respect the coherence that makes it easy to use.  
+You can run and explore the source of all the examples, they are simple HTML pages and links are all provided.
+
 Before starting, remember these two things:
 - Filters take one or more input using the method `addInput()`, must be ran using `update()` and produce one or more output that can be accessed with `getOutput()`
 - When a filter takes multiple inputs, the method `addInput()` takes an additional argument to identify it. Read the [code documentation](pixpipe.github.io/pixpipejs/doc/) to find out what are the *categories* of the expected inputs.
 - The method `getOutput()` has the same feature. If multiple are expected, the method will take an argument (*string*) that is the *category* of the output. Though you can alway use the method `.forEachOutput(...)` - [doc](http://www.pixpipe.io/pixpipejs/doc/#Filter.forEachOutput)
 - When it comes to containers' metadata (particular setting, overwriting a default algorithm value, etc.), the filter method `.setMetadata(...)` must be called.
-- A `Filter` should **NEVER** modify the input data  
+- A `Filter` should **NEVER** modify the input data and it's the duty of the developer to respect that.  
 
 ```Javascript
 // the object myImage comes from a file that you previously opened
