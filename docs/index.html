@@ -635,17 +635,33 @@
 <h1 id="install-for-production">Install for production</h1>
 <pre><code class="lang-bash">npm install --save pixpipe
 </code></pre>
-<p>The file that will then be imported is <code>dist/pixpipe.js</code>. It is a <a href="https://github.com/umdjs/umd" target="_blank">umd</a> bundle, meaning it&apos;s ugly but it&apos;s compatible everywhere: Node, Browsers and ES modules. Still, Pixpipe won&apos;t work on <strong>old</strong> browsers (i.e. the one that don&apos;t support typed arrays).</p>
+<p>The <code>dist</code> folder of Pixpipe contains several pre-built bundles:</p>
+<ol>
+<li><code>pixpipe.js</code> is the default <em>umd</em> bundle you can import from an HTML document, from an ES module or <em>require</em> from node. It is transpiled into ES5 for broader compatibility.</li>
+<li><code>pixpipe.min.js</code> is the same as <code>pixpipe.js</code> but minified, which makes it about 3 times smaller</li>
+<li><code>pixpipe.es6.js</code> is also a <em>umd</em> bundle that goes more or less anywhere but its syntax remain ES6, which is the original Pixpipe syntax</li>
+<li><code>pixpipe.esmodule.js</code> is a <em>es module</em>, which is specialy baked to be imported (using <code>import</code>) from another <em>es module</em>. You cannot use this version directly in a HTML page with the <code>&lt;script&gt;</code> markups or <code>require</code> it from Node.</li>
+</ol>
+<p>The file that will then be imported is <code>dist/pixpipe.js</code> <strong>[1]</strong>, because it is defined as <code>main</code> in the <code>package.json</code> file. The <strong>[2]</strong> and <strong>[3]</strong> are mostly alternative to this main bundle, to be use in more of less the same conditions.<br>While they can all be imported in a <em>es module</em>, only the <strong>[4]</strong> provides an optimal way to do it, by selecting only the class you need and thus make a smaller final bundle.</p>
 <p><strong>In HTML file</strong></p>
-<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;pixpipe/dist/pixpipe.js&quot;</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
-<span class="hljs-comment">&lt;!-- or alternatively --&gt;</span>
+<pre><code class="lang-html"><span class="hljs-comment">&lt;!-- Import the ES5 UMD bundle --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;pixpipe/dist/pixpipe.js&quot;</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+
+<span class="hljs-comment">&lt;!-- or alternatively, the ES6 UMD bundle --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;pixpipe/dist/pixpipe.min.js&quot;</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+
+<span class="hljs-comment">&lt;!-- or alternatively, the minified ES5 UMD bundle --&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;pixpipe/dist/pixpipe.min.js&quot;</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
 </code></pre>
 <p><strong>In Node</strong></p>
 <pre><code class="lang-js"><span class="hljs-keyword">const</span> pixpipe = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;pixpipe&quot;</span>);
 </code></pre>
-<p><strong>In ES module</strong></p>
-<pre><code class="lang-js"><span class="hljs-keyword">import</span> pixpipe <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;pixpipe&apos;</span>;
+<p><strong>In ES module</strong>
+This imports <strong>ALL</strong> Pixpipe:</p>
+<pre><code class="lang-js"><span class="hljs-keyword">import</span> pixpipe <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;pixpipe&apos;</span>
+</code></pre>
+<p>To have a finer granularity on what part of Pixpipe you want to import (and thus have a smaller final bundle), you can also use the <em>esmodule</em> version of Pixpipe:</p>
+<pre><code class="lang-js"><span class="hljs-keyword">import</span> { Image2D, Image3D } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;pixpipe/dist/pixpipe.esmodule.js&apos;</span>
 </code></pre>
 <script>
 if ('UA-110948661-1') {
@@ -697,7 +713,7 @@ if ('UA-110948661-1') {
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Pixpipe Overview","level":"1.2","depth":1,"path":"1-overview/0-README.md","ref":"1-overview/0-README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["insert-logo","favicon","analytics","expandable-chapters","hide-published-with"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"analytics":{"google":"UA-110948661-1"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":{"shortcut":"/images/favicon.png","bookmark":"/images/favicon.png","appleTouch":"/images/favicon.png","appleTouchMore":{"120x120":"/images/favicon.png","180x180":"/images/favicon.png"}},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://github.com/Pixpipe/cookbook/blob/master/docs/images/logo.png?raw=true"},"expandable-chapters":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"My Book","gitbook":"*"},"file":{"path":"README.md","mtime":"2018-03-20T20:52:57.317Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-04-10T19:24:12.698Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Pixpipe Overview","level":"1.2","depth":1,"path":"1-overview/0-README.md","ref":"1-overview/0-README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["insert-logo","favicon","analytics","expandable-chapters","hide-published-with"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"analytics":{"google":"UA-110948661-1"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":{"shortcut":"/images/favicon.png","bookmark":"/images/favicon.png","appleTouch":"/images/favicon.png","appleTouchMore":{"120x120":"/images/favicon.png","180x180":"/images/favicon.png"}},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://github.com/Pixpipe/cookbook/blob/master/docs/images/logo.png?raw=true"},"expandable-chapters":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"My Book","gitbook":"*"},"file":{"path":"README.md","mtime":"2018-05-01T00:07:56.840Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-05-01T00:08:02.517Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
